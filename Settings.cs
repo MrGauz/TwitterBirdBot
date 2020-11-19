@@ -16,18 +16,18 @@ namespace TwitterBirdBot
         }
     }
 
-    public class Database
+    public class MySQL
     {
         public String Host { get; set; }
-        // TODO - Dani: add int "Port" attribute
-        // TODO - Dani: add "User" attribute
-        // TODO - Dani: add "Pass" attribute
-        // TODO - Dani: add "Database" attribute
+        public Int64 Port { get; set; }
+        public String User { get; set; }
+        public String Pass { get; set; }
+        public String Name { get; set; }
     }
     public class Config
     {
-        public Database Database { get; set; }
-        // TODO - Dani: based on Database, build classes for Telegram
+        public MySQL MySQL { get; set; }
+        // TODO - Dani: based on MySQL, build classes for Telegram
         // see config.json.example
     }
 }
