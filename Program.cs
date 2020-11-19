@@ -6,7 +6,9 @@ namespace TwitterBirdBot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // TODO - Dani: try running it           
+            Settings.Initialize();
+            Console.WriteLine(Settings.Config.Database.Host);
         }
     }
 }
