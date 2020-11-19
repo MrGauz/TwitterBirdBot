@@ -7,7 +7,7 @@
         "Name": ""
     },
     "SQLite": {
-        "Path": ""
+        "Path": "db.sqlite"
     },
     "Telegram": {
         "Token": ""
