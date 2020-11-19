@@ -22,7 +22,7 @@ namespace TwitterBirdBot
         // TODO - Dani: add int "Port" attribute
         // TODO - Dani: add "User" attribute
         // TODO - Dani: add "Pass" attribute
-        // TODO - Dani: add "Table" attribute
+        // TODO - Dani: add "Database" attribute
     }
     public class Config
     {
