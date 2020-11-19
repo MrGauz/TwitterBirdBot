@@ -9,8 +9,7 @@
     "Telegram": {
         "Token": ""
     },
-    "_comment": [
-        "TODO - Dani: add Twitter bot config here",
-        "Don't forget to map it in Settings class"
-    ]
+    "Twitter": {
+    "Token": ""
+  }
 }

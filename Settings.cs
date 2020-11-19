@@ -24,10 +24,19 @@ namespace TwitterBirdBot
         public String Pass { get; set; }
         public String Name { get; set; }
     }
+
+    public class Telegram
+    {
+        public String Token { get; set; }
+    }
+    public class Twitter
+    {
+        public String Token { get; set; }
+    }
     public class Config
     {
         public MySQL MySQL { get; set; }
-        // TODO - Dani: based on MySQL, build classes for Telegram
-        // see config.json.example
+        public Telegram Telegram { get; set; }
+        public Twitter Token { get; set; }
     }
 }
