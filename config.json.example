@@ -1,0 +1,16 @@
+{
+    "Database": {
+        "Host": "localhost",
+        "Port": 3306,
+        "User": "",
+        "Pass": "",
+        "Table": ""
+    },
+    "Telegram": {
+        "Token": ""
+    },
+    "_comment": [
+        "TODO - Dani: add Twitter bot config here",
+        "Don't forget to map it in Settings class"
+    ]
+}
