@@ -8,8 +8,8 @@ namespace TwitterBirdBot
     // Try to run and test it in Program.Main()
     public class Settings
     {
-        public static Config Config;
-        public static void Initialize()
+        public static readonly Config Config;
+        static Settings()
         {
             string jsonString = File.ReadAllText("config.json");
             Config = JsonSerializer.Deserialize<Config>(jsonString);
@@ -25,17 +25,25 @@ namespace TwitterBirdBot
         public String Name { get; set; }
     }
 
+    public class SQLite
+    {
+        public String Path { get; set; }
+    }
+
     public class Telegram
     {
         public String Token { get; set; }
     }
+
     public class Twitter
     {
         public String Token { get; set; }
     }
+
     public class Config
     {
         public MySQL MySQL { get; set; }
+        public SQLite SQLite { get; set; }
         public Telegram Telegram { get; set; }
         public Twitter Token { get; set; }
     }

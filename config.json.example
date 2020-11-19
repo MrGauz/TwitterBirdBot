@@ -1,15 +1,18 @@
 {
-    "Database": {
+    "MySQL": {
         "Host": "localhost",
         "Port": 3306,
         "User": "",
         "Pass": "",
-        "Database": ""
+        "Name": ""
+    },
+    "SQLite": {
+        "Path": ""
     },
     "Telegram": {
         "Token": ""
     },
     "Twitter": {
-    "Token": ""
-  }
+        "Token": ""
+    }
 }
