@@ -4,7 +4,7 @@
         "Port": 3306,
         "User": "",
         "Pass": "",
-        "Table": ""
+        "Database": ""
     },
     "Telegram": {
         "Token": ""
