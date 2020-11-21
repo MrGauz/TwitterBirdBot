@@ -3,4 +3,4 @@
 obj/
 bin/
 config.json
-database/
+*.sqlite

@@ -1,27 +1,16 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using TwitterBirdBot.Models;
 
-namespace TwitterBirdBot
+namespace TwitterBirdBot.DatabaseStuff
 {
-    public class Database
+    public class SqliteConnections
     {
-#if DEBUG
-        public static readonly SqliteConnection Connection;
-#else
-        // TODO - Gauz: MySQL connection
-#endif
-        static Database()
-        {
-#if DEBUG
-            Connection = InitializeSQLite();
-#else
-    //TODO - Gauz: MySQL connection
-#endif
-        }
+        private static readonly SqliteConnection Connection;
 
-        private static SqliteConnection InitializeSQLite()
+        static SqliteConnections()
         {
             String sqlitePath = Settings.Config.SQLite.Path;
 
@@ -32,12 +21,12 @@ namespace TwitterBirdBot
             }
 
             string connectionString = $"Data Source={sqlitePath}";
-            SqliteConnection connection = new SqliteConnection(connectionString);
-            connection.Open();
+            Connection = new SqliteConnection(connectionString);
+            Connection.Open();
 
             if (newFile)
             {
-                var query = connection.CreateCommand();
+                var query = Connection.CreateCommand();
                 query.CommandText = "BEGIN TRANSACTION;" +
                                     "CREATE TABLE \"subs\" (" +
                                         "\"id\"              INTEGER      NOT NULL," +
@@ -59,14 +48,34 @@ namespace TwitterBirdBot
                     Console.WriteLine($"{ex.Message} (sqlite code: {ex.SqliteErrorCode})\n" + ex.StackTrace);
                 }
             }
-
-            return connection;
+        }
+        public static void AddSubscription(Subscription subscription)
+        {
+            var query = Connection.CreateCommand();
+            // TODO - Dani: comlete INSERT command
+            // Then test if it works in Program.Main()
+            query.CommandText = $"INSERT INTO subs " +
+                $"('tg_user_id', '', '', '') " +
+                $"VALUES " +
+                $"('{subscription.TgUserId}', '', '', '{DateTime.Now:yyyy-MM-dd HH:mm:ss}');";
+            try
+            {
+                query.ExecuteNonQuery();
+            }
+            catch (SqliteException ex)
+            {
+                Console.WriteLine($"{ex.Message} (sqlite code: {ex.SqliteErrorCode})\n" + ex.StackTrace);
+            }
         }
 
-        public static void AddSubscription(Subscription sub)
+        public static List<Subscription> GetSubscriptions(string tgUserId)
         {
-            // TODO - Gauz: write skeleton
-            // TODO - Dani: complete method           
+            throw new NotImplementedException();
+        }
+
+        public static List<Subscription> GetSubscriptions(SocialNetworkType socialNetworkType)
+        {
+            throw new NotImplementedException();
         }
     }
 }
