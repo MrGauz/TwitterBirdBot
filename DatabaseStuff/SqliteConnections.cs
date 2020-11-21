@@ -70,12 +70,39 @@ namespace TwitterBirdBot.DatabaseStuff
 
         public static List<Subscription> GetSubscriptions(string tgUserId)
         {
-            throw new NotImplementedException();
+            List<Subscription> subs = new List<Subscription>();
+            var query = Connection.CreateCommand();
+            query.CommandText = $"SELECT * FROM subs WHERE tg_user_id = {tgUserId};";
+            try
+            {
+                var result = query.ExecuteReader();
+                while (result.Read())
+                {
+                    Subscription sub = new Subscription
+                    {
+                        TgUserId = result["tg_user_id"].ToString(),
+                        SocialNetworkString = result["social_network"].ToString(),
+                        ShowLinks = Boolean.Parse(result["show_links"].ToString()),
+                        SubscribedAt = DateTime.Parse(result["subscribed_at"].ToString()),
+                        LastPostId = result["last_post_id"].ToString(),
+                        LastPostAt = DateTime.Parse(result["last_post_at"].ToString())
+                    };
+                    subs.Add(sub);
+                }
+            }
+            catch (SqliteException ex)
+            {
+                Console.WriteLine($"{ex.Message} (sqlite code: {ex.SqliteErrorCode})\n" + ex.StackTrace);
+            }
+
+            return subs;
         }
 
         public static List<Subscription> GetSubscriptions(SocialNetworkType socialNetworkType)
         {
-            throw new NotImplementedException();
+            // TODO - Dani: implement this function
+            // P.S. it's very similar to GetSubsctipzions(tgUserId)
+            return null;
         }
     }
 }
