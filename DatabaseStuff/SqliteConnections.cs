@@ -34,8 +34,8 @@ namespace TwitterBirdBot.DatabaseStuff
                                         "\"social_network\"  varchar(50)  NOT NULL   DEFAULT 'Twitter'," +
                                         "\"show_links\"      bool         NOT NULL   DEFAULT true," +
                                         "\"subscribed_at\"   datetime     NOT NULL," +
-                                        "\"last_post_id\"    varchar(50)  NOT NULL," +
-                                        "\"last_post_at\"    datetime     NOT NULL," +
+                                        "\"last_post_id\"    varchar(50)  NOT NULL   DEFAULT '0'," +
+                                        "\"last_post_at\"    datetime     NOT NULL   DEFAULT '1970-01-01 00:00:00'," +
                                         "PRIMARY KEY(\"id\" AUTOINCREMENT)" +
                                     ");" +
                                     "COMMIT;";
@@ -52,12 +52,10 @@ namespace TwitterBirdBot.DatabaseStuff
         public static void AddSubscription(Subscription subscription)
         {
             var query = Connection.CreateCommand();
-            // TODO - Dani: comlete INSERT command
-            // Then test if it works in Program.Main()
             query.CommandText = $"INSERT INTO subs " +
-                $"('tg_user_id', '', '', '') " +
+                $"('tg_user_id', 'social_network', 'show_links', 'subscribed_at') " +
                 $"VALUES " +
-                $"('{subscription.TgUserId}', '', '', '{DateTime.Now:yyyy-MM-dd HH:mm:ss}');";
+                $"('{subscription.TgUserId}', '{subscription.SocialNetwork}', '{subscription.ShowLinks}', '{DateTime.Now:yyyy-MM-dd HH:mm:ss}');";
             try
             {
                 query.ExecuteNonQuery();
@@ -100,9 +98,32 @@ namespace TwitterBirdBot.DatabaseStuff
 
         public static List<Subscription> GetSubscriptions(SocialNetworkType socialNetworkType)
         {
-            // TODO - Dani: implement this function
-            // P.S. it's very similar to GetSubsctipzions(tgUserId)
-            return null;
+            List<Subscription> subs = new List<Subscription>();
+            var query = Connection.CreateCommand();
+            query.CommandText = $"SELECT * FROM subs WHERE social_network = '{socialNetworkType}';";
+            try
+            {
+                var result = query.ExecuteReader();
+                while (result.Read())
+                {
+                    Subscription sub = new Subscription
+                    {
+                        TgUserId = result["tg_user_id"].ToString(),
+                        SocialNetworkString = result["social_network"].ToString(),
+                        ShowLinks = Boolean.Parse(result["show_links"].ToString()),
+                        SubscribedAt = DateTime.Parse(result["subscribed_at"].ToString()),
+                        LastPostId = result["last_post_id"].ToString(),
+                        LastPostAt = DateTime.Parse(result["last_post_at"].ToString())
+                    };
+                    subs.Add(sub);
+                }
+            }
+            catch (SqliteException ex)
+            {
+                Console.WriteLine($"{ex.Message} (sqlite code: {ex.SqliteErrorCode})\n" + ex.StackTrace);
+            }
+
+            return subs;
         }
     }
 }
