@@ -27,6 +27,9 @@ namespace TwitterBirdBot.DatabaseStuff
             if (newFile)
             {
                 var query = Connection.CreateCommand();
+                // TODO - Dani: we don't have twitter handle saved in DB :D
+                // Please add it to table scheme
+                // Think of all places, where updateted table scheme would matter
                 query.CommandText = "BEGIN TRANSACTION;" +
                                     "CREATE TABLE \"subs\" (" +
                                         "\"id\"              INTEGER      NOT NULL," +
