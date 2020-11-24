@@ -10,6 +10,7 @@
         "Path": "db.sqlite"
     },
     "Telegram": {
+        "_comment": "TODO - Dani: register Telegram bot",
         "Token": ""
     },
     "Twitter": {
