@@ -13,6 +13,9 @@
         "Token": ""
     },
     "Twitter": {
-        "Token": ""
+        "ConsumerKey": "",
+        "ConsumerSecret": "",
+        "OAuthToken": "",
+        "AccessToken": ""
     }
 }

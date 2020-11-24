@@ -13,7 +13,7 @@ namespace TwitterBirdBot
         }
     }
 
-    public class MySQL
+    public class MySQLConfig
     {
         public string Host { get; set; }
         public int Port { get; set; }
@@ -22,26 +22,29 @@ namespace TwitterBirdBot
         public string Name { get; set; }
     }
 
-    public class SQLite
+    public class SQLiteConfig
     {
         public string Path { get; set; }
     }
 
-    public class Telegram
+    public class TelegramConfig
     {
         public string Token { get; set; }
     }
 
-    public class Twitter
+    public class TwitterConfig
     {
-        public string Token { get; set; }
+        public string ConsumerKey { get; set; }
+        public string ConsumerSecret { get; set; }
+        public string OAuthToken { get; set; }
+        public string AccessToken { get; set; }
     }
 
     public class Config
     {
-        public MySQL MySQL { get; set; }
-        public SQLite SQLite { get; set; }
-        public Telegram Telegram { get; set; }
-        public Twitter Twitter { get; set; }
+        public MySQLConfig MySQL { get; set; }
+        public SQLiteConfig SQLite { get; set; }
+        public TelegramConfig Telegram { get; set; }
+        public TwitterConfig Twitter { get; set; }
     }
 }
