@@ -2,10 +2,6 @@
 
 namespace TwitterBirdBot.Models
 {
-    public enum SocialNetworkType
-    {
-        Twitter
-    }
     public class Subscription
     {
         public string TgUserId { get; set; }
