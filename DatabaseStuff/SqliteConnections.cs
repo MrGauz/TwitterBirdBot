@@ -49,13 +49,15 @@ namespace TwitterBirdBot.DatabaseStuff
                 }
             }
         }
+
         public static void AddSubscription(Subscription subscription)
         {
             var query = Connection.CreateCommand();
             query.CommandText = $"INSERT INTO subs " +
-                $"('tg_user_id', 'social_network', 'show_links', 'subscribed_at') " +
+                $"('tg_user_id', 'social_network', 'show_links', 'last_tweet_id', 'last_tweet_at', 'subscribed_at') " +
                 $"VALUES " +
-                $"('{subscription.TgUserId}', '{subscription.SocialNetwork}', '{subscription.ShowLinks}', '{DateTime.Now:yyyy-MM-dd HH:mm:ss}');";
+                $"('{subscription.TgUserId}', '{subscription.SocialNetwork}', '{subscription.ShowLinks}', " +
+                $"'{subscription.LastPostId}', '{subscription.LastPostAt}', '{DateTime.Now:yyyy-MM-dd HH:mm:ss}');";
             try
             {
                 query.ExecuteNonQuery();
